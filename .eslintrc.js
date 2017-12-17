@@ -12,7 +12,6 @@ module.exports = {
     "rules": {
         "func-names": ["error", "never"],
         "indent": [1, 4, { "SwitchCase": 1 }],
-        "react/prefer-stateless-function": ["warn"],
         "global-require": ["off"],
         "consistent-this": [1, "self"],
         "no-underscore-dangle": ["error", { "allow": ["_id"] }],
