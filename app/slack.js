@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const { RtmClient } = require('@slack/client');
+const { RTM_EVENTS } = require('@slack/client');
 const { token } = require('../env.json');
 
 
@@ -29,11 +30,20 @@ async function sendMessageToChannel(message) {
 }
 
 
+const client = new RtmClient(token);
+
+client.on(RTM_EVENTS.MESSAGE, (message) => {
+    if (message.text.includes('wer') && message.text.includes('küchendienst')) {
+        console.log('yoyoyo');
+    }
+});
+
+
 module.exports = {
     getChannelParticipants,
     sendMessage,
     sendMessageToChannel,
-    client: new RtmClient(token),
+    client,
 };
 
 function objectToQueryString(queryObject) {
