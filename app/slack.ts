@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import { RtmClient } from "@slack/client";
 const { token } = require("../env.json");
 
-async function getChannelParticipants() {
+async function getChannelParticipants(): Promise<[String]> {
     const response = await fetch(`https://slack.com/api/channels.list?token=${token}`);
     const json = await response.json();
 
@@ -28,7 +28,7 @@ async function sendMessageToChannel(message: String) {
     return sendMessage(channelId, message);
 }
 
-function objectToQueryString(queryObject: QueryObject) {
+function objectToQueryString(queryObject: QueryObject): String {
     let queryString = "";
     Object.keys(queryObject).forEach((key, index) => {
         const value = queryObject[key];
