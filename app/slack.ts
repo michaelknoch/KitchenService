@@ -1,5 +1,5 @@
 import { Channel, QueryObject } from "./interfaces";
-import fetch from "node-fetch";
+import fetch, { Response } from "node-fetch";
 import { RtmClient } from "@slack/client";
 const { token } = require("../env.json");
 
@@ -12,7 +12,7 @@ async function getChannelParticipants(): Promise<[String]> {
     return members;
 }
 
-async function sendMessage(receiver: String, message: String) {
+async function sendMessage(receiver: String, message: String): Promise<Response> {
     const queryString = objectToQueryString({
         channel: receiver,
         text: message,
@@ -23,7 +23,7 @@ async function sendMessage(receiver: String, message: String) {
     return fetch(`https://slack.com/api/chat.postMessage${queryString}`);
 }
 
-async function sendMessageToChannel(message: String) {
+async function sendMessageToChannel(message: String): Promise<Response> {
     const channelId = "C8F3EFS80";
     return sendMessage(channelId, message);
 }

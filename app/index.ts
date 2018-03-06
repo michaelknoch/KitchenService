@@ -1,11 +1,11 @@
 import { getChannelParticipants, sendMessage, sendMessageToChannel } from "./slack";
 const currentWeekNumber = require("current-week-number");
 
-async function sendPublicReminder(userId: String) {
-    return sendMessageToChannel(`<@${userId}> hat Kuechendienst`);
+function sendPublicReminder(userId: String): void {
+    sendMessageToChannel(`<@${userId}> hat Kuechendienst`);
 }
 
-export function monday() {
+export function monday(): void {
     getChannelParticipants().then(participants => {
         const weekNumber: number = currentWeekNumber();
         const index = participants.length % weekNumber - 1;
@@ -16,4 +16,3 @@ export function monday() {
         sendPublicReminder(newUserId);
     });
 }
-
